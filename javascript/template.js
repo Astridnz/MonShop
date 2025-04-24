@@ -10,8 +10,8 @@ export default class TemplateHome {
     constructor() {
         this.container = document.querySelector(".templateContainer");
         this.template = document.querySelector("template");
-        this.homepageItems = Array.from(document.querySelectorAll(".homepageItem"));
         this.blogFragment = this.template?.content;
+        this.homepageItems = Array.from(this.blogFragment.querySelectorAll(".homepageItem"));
         this.templateTitle = this.blogFragment.querySelector("h1");
         this.templateImg = this.blogFragment.querySelector("img");
         this.templatePrice = this.blogFragment.querySelector(".prix");
@@ -24,9 +24,9 @@ export default class TemplateHome {
             console.log(articles);
             articles.forEach((article) => {
                 // console.log(article);
-                // this.homepageItems?.forEach((homepageItem)=>{
-                //     homepageItem.id = `${article.id}`
-                // })
+                this.homepageItems?.forEach((homepageItem) => {
+                    homepageItem.id = `${article.id}`;
+                });
                 if (this.templateTitle) {
                     this.templateTitle.textContent = article.title;
                 }
