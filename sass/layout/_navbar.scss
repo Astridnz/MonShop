@@ -1,4 +1,4 @@
-nav{
+.navDesktop {
     position: fixed;
     top: 0;
     width: 100%;
@@ -9,13 +9,40 @@ nav{
     justify-content: space-between;
     align-items: center;
     backdrop-filter: blur(5px);
-    ul{
+    z-index: 10;
+
+    ul {
         width: 40%;
         display: flex;
         justify-content: space-evenly;
-    a{
-        font-size: $font-size-m;
-    }
-    }
 
+        li {
+            a {
+                font-size: $font-size-m;
+            }
+        }
+    }
 }
+
+@media screen and (max-width: 1170px){
+    .navDesktop{
+        ul{
+            width: 60%;
+        }
+    }
+}
+
+@media screen and (max-width: 870px){
+    .navDesktop{
+        ul{
+            width: 80%;
+        }
+    }
+}
+@media screen and (max-width: 575px){
+    .navDesktop{
+    display: none;
+    }
+}
+
+

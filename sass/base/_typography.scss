@@ -26,9 +26,7 @@ a{
         text-decoration: underline;
     }
 }
-// h3{
-//     font-family: ;
-//     font-size: ;
-//     font-weight: ;
-//     color: ;
-// }
+h3{
+    font-family: $title-font ;
+    color: $text-color ;
+}
