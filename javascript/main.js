@@ -1,6 +1,6 @@
 "use strict";
 import Burger from "./burger.js";
-import TemplateHome from "./template.js";
+import TemplateHome from "./templateHome.js";
 //? Ajout le burger menu en dimension phone/tablette
 if (window.matchMedia('screen and (max-width:1023px)').matches) {
     const burger = new Burger();

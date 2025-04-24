@@ -1,6 +1,6 @@
 "use strict"
 import Burger from "./burger.js"
-import TemplateHome from "./template.js"
+import TemplateHome from "./templateHome.js"
 
 
 

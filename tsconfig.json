@@ -9,7 +9,7 @@
     "files":[
         "typescript/main.ts",
         "typescript/burger.ts",
-        "typescript/template.ts"
+        "typescript/templateHome.ts"
         
     ]
 }

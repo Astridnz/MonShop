@@ -23,7 +23,7 @@ constructor() {
         this.blogFragment = this.template?.content!
         
         this.homepageItems = Array.from(this.blogFragment.querySelectorAll(".homepageItem"))
-        this.templateTitle = this.blogFragment.querySelector("h1")
+        this.templateTitle = this.blogFragment.querySelector("h3")
         this.templateImg = this.blogFragment.querySelector("img")
         this.templatePrice = this.blogFragment.querySelector(".prix")
         
@@ -49,7 +49,7 @@ constructor() {
                     }
                     if(this.templatePrice){
                         console.log(this.templateImg);
-                        this.templatePrice.textContent = article.price.toString()
+                        this.templatePrice.textContent = `${article.price.toString()}€`
                     }
                     const clone = this.blogFragment?.cloneNode(true) as DocumentFragment
                     this.container?.append(clone)
