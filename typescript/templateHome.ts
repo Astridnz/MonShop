@@ -27,10 +27,10 @@ constructor() {
         this.templateImg = this.blogFragment.querySelector("img")
         this.templatePrice = this.blogFragment.querySelector(".prix")
         
-        this.cloneFetch
+        // this.cloneFetchHome()
     }
 
-    async cloneFetch(){
+    async cloneFetchHome(){
             const response = await fetch ("https://fakestoreapi.com/products")
             if (response.ok){
                 const articles = await response.json()
@@ -48,7 +48,7 @@ constructor() {
                         this.templateImg.src = article.image
                     }
                     if(this.templatePrice){
-                        console.log(this.templateImg);
+                        // console.log(this.templateImg);
                         this.templatePrice.textContent = `${article.price.toString()}€`
                     }
                     const clone = this.blogFragment?.cloneNode(true) as DocumentFragment
