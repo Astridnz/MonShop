@@ -1,3 +1,8 @@
 *.js
-*.css
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
 node_modules/
+package-lock.json
+[T]emp

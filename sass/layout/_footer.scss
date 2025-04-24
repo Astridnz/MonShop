@@ -1,0 +1,24 @@
+footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    color: $background-color;
+    background-color: $text-color;
+    height: 15rem;
+    a{
+        color: $background-color;
+    }
+    .footer__links{
+        width: 70%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        &--item{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

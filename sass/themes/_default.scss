@@ -8,6 +8,7 @@
     body{
         font-size: 100%;
         overflow-x: hidden;
+        color: $text-color;
     }
     
     img{
@@ -15,6 +16,11 @@
         height: 100%;
         object-fit: cover;
     }
+    li{
+        display: inline-block;
+        list-style: none;
+        font-size: $font-size-m;
+        }
     
     .hide{
         display: none;
