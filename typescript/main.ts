@@ -1,5 +1,6 @@
 "use strict"
 import Burger from "./burger.js"
+import TemplateHome from "./template.js"
 
 
 
@@ -10,5 +11,6 @@ import Burger from "./burger.js"
     burger.logoClick()
     }
 
-
-
+//?Ajout du template article 
+    const template = new TemplateHome()
+    template.cloneFetch()

@@ -29,9 +29,9 @@ export default class Burger{
             
         //TODO création des attributs (alt, chemin sources...)
             this.toggler.type = "checkbox"
-            this.logoBurger.src = "./../1.0/logo/burger-logo.svg"
+            this.logoBurger.src = ""
             this.logoBurger.alt = "logo Burger Menu"
-            this.logoBackArrow.src = "./../1.0/logo/back-arrow.svg"
+            this.logoBackArrow.src = ""
             this.logoBackArrow.alt = "logo back arrow"
         
         //TODO création des classes
