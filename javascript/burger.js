@@ -25,9 +25,9 @@ export default class Burger {
             </ul>`;
         //TODO création des attributs (alt, chemin sources...)
         this.toggler.type = "checkbox";
-        this.logoBurger.src = "";
+        this.logoBurger.src = "./../assets/icones/burger-bar.png";
         this.logoBurger.alt = "logo Burger Menu";
-        this.logoBackArrow.src = "";
+        this.logoBackArrow.src = "./../assets/icones/fermer.png";
         this.logoBackArrow.alt = "logo back arrow";
         //TODO création des classes
         // this.label.classList.add("label")
