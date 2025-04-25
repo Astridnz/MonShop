@@ -1,0 +1,69 @@
+.modaleDialog{
+    position: fixed;
+    top: -50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: block;
+    background : grey transparent(50%);
+    
+
+      }
+        .modaleContainer{
+            position: relative;
+            top: -30%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            width: 80%;
+            height: 80%;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 10% 5% 15% 5% 10% 10% 40%;
+        grid-template-areas: 
+        "iM tM"
+        "iM idM"
+        "iM pM"
+        "iM lM"
+        "iM inM"
+        "iM bM"
+        "iM dM"
+        ;
+        .modaleImg{
+            background-color: red;
+            grid-area: iM ;
+    
+        }
+        .modaleDesc{
+            background-color: blue;
+            grid-area: dM;
+        }
+        h2{
+                background-color: greenyellow;
+                grid-area: tM ;
+        }
+        .modaleId{
+            background-color: violet;
+            grid-area: idM ;
+        }
+        .modalePrice{
+            background-color: palegreen;
+            grid-area: pM ;
+        }
+        button{
+            .btnAddToCart{
+                background-color: powderblue;
+                grid-area: bM ;
+            }
+        }
+        input{
+            background-color: gold;
+            grid-area: inM ;
+        }
+        label{
+            background-color: pink;
+            grid-area: lM ;
+        }
+    }
+}
