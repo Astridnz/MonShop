@@ -18,7 +18,7 @@ import TemplateModale from "./templateModale.js"
 
 //TODO Ajout du template article Home
 //* création du type article
-type Article = { id: number, title: string, price: number, description: string, category: string, image: string }
+// type Article = { id: number, title: string, price: number, description: string, category: string, image: string }
 
 //* déclaration des variables pour le template d'un article sur la home page
 const container: HTMLDivElement | null = document.querySelector(".templateContainer")
@@ -27,40 +27,42 @@ const blogFragment: DocumentFragment | undefined = template?.content
 const articleTitle: HTMLHeadingElement | null = blogFragment!.querySelector("h3")
 const articleImg: HTMLImageElement | null = blogFragment!.querySelector("img")
 const articlePrice: HTMLParagraphElement | null = blogFragment!.querySelector(".prix")
-
 const products: Product[] = [];
+let homepageItems: HTMLElement[] | null = Array.from(blogFragment!.querySelectorAll(".homepageItem"))
 
 //*fonction pour rechercher les données de l'API, associer respectivement leurs valeurs aux valeurs des éléments du template et enfin cloner ce template autant de fois qu'il y a de donnée dans l'API 
 cloneFetchHome()
 async function cloneFetchHome() {
     const response = await fetch("https://fakestoreapi.com/products")
     if (response.ok) {
-        let homepageItems: HTMLElement[] | null = Array.from(blogFragment!.querySelectorAll(".homepageItem"))
         const articles: Object[] = await response.json();
 
-        articles.forEach((article) => {
-            products.push(new Product(article as Article));
-        });
+        
+        articles.forEach((article: Product) => {
+            products.push(new Product(article as Product));
+        })
 
-        articles.forEach((article: Article) => {
+        products.forEach((product)=>{
             homepageItems?.forEach((homepageItem) => {
-                homepageItem.id = `${article.id}`
+                homepageItem.id = `${product.id}`
             })
             if (articleTitle) {
-                articleTitle.textContent = article.title
+                articleTitle.textContent = product.title
             }
             if (articleImg) {
-                articleImg.src = article.image
+                articleImg.src = product.image
             }
             if (articlePrice) {
-                articlePrice.textContent = `${article.price.toString()}€`
+                articlePrice.textContent = `${product.price.toString()}€`
             }
             const clone = blogFragment?.cloneNode(true) as DocumentFragment
             container?.append(clone)
         })
+        console.log(products);
+        
         homepageItems = Array.from(document.querySelectorAll(".homepageItem"))
         homepageItems?.forEach((homepageItem) => {
-            console.log(homepageItem);
+            // console.log(homepageItem);
             homepageItem.addEventListener("click", () => {
                 //    TemplateModale.classList.add("open") 
             })
@@ -72,5 +74,14 @@ async function cloneFetchHome() {
 
 
 //TODO Ajout du template aritcle Modale
-    const template2 = new TemplateModale()
+    const modale = new TemplateModale()
 
+homepageItems.forEach((homepageItem)=>{
+    homepageItem.addEventListener("click",()=>{
+        modale.modaleDialog.showModal
+    })
+
+    homepageItem.addEventListener("click", ()=>{
+        modale.modaleDialog.close
+    })
+})

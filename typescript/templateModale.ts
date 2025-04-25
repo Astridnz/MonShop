@@ -46,18 +46,4 @@ export default class TemplateModale{
         this.modaleDialog.append(this.modaleContainer)
         this.main?.append(this.modaleDialog)
     }
-
-
-    // async cloneFetchModale() {
-    //     // await TemplateHome
-    //     const response = await fetch("https://fakestoreapi.com/products")
-    //     if (response.ok) {
-    //         const articles = await response.json()
-    //         articles.forEach((article: Article) => {
-                
-    //         })
-    //     }
-    // }
-
-
 }
