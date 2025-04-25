@@ -53,18 +53,15 @@ async function cloneFetchHome() {
                 //    TemplateModale.classList.add("open") 
             });
         });
-        test()
+        popUpModale();
     }
 }
 //TODO Ajout du template aritcle Modale
-function test()
-{
+function popUpModale() {
     const modale = new TemplateModale();
-    
     console.log(homepageItems);
     homepageItems.forEach((homepageItem) => {
-    console.log(homepageItem);
-    
+        console.log(homepageItem);
         homepageItem.addEventListener("click", () => {
             modale.modaleDialog.showModal();
         });
@@ -72,5 +69,4 @@ function test()
             modale.modaleDialog.close();
         });
     });
-
 }

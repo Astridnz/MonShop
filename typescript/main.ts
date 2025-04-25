@@ -67,6 +67,7 @@ async function cloneFetchHome() {
                 //    TemplateModale.classList.add("open") 
             })
         })
+        popUpModale()
     }
 }
 
@@ -74,14 +75,20 @@ async function cloneFetchHome() {
 
 
 //TODO Ajout du template aritcle Modale
-    const modale = new TemplateModale()
+function popUpModale()
+{
+    const modale = new TemplateModale();
+    
+    console.log(homepageItems);
+    homepageItems.forEach((homepageItem) => {
+    console.log(homepageItem);
+    
+        homepageItem.addEventListener("click", () => {
+            modale.modaleDialog.showModal();
+        });
+        modale.modaleDialog.addEventListener("click", () => {
+            modale.modaleDialog.close();
+        });
+    });
 
-homepageItems.forEach((homepageItem)=>{
-    homepageItem.addEventListener("click",()=>{
-        modale.modaleDialog.showModal
-    })
-
-    modale.modaleDialog.addEventListener("click", ()=>{
-        modale.modaleDialog.close
-    })
-})
+}
