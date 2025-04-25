@@ -3,8 +3,7 @@
         "outDir": "javascript",
         "moduleResolution": "node",
         "target": "ESNext",
-        "noEmitOnError": true,
-        "strict": true
+        "noEmitOnError": true
     },
     "files":[
         "typescript/main.ts",

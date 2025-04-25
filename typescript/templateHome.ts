@@ -2,7 +2,7 @@
 
 import Product from "./Product.js"
 
-// type Article = {id:number, title: string, price: number, description: string, category: string, image: string}
+type Article = {id:number, title: string, price: number, description: string, category: string, image: string}
 
 
 

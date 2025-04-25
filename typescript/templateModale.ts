@@ -1,11 +1,11 @@
 "use strict"
 
-import TemplateHome from "./templateHome.js"
 
-type Article = {id:number, title: string, price: number, description: string, category: string, image: string}
+// type Article = {id:number, title: string, price: number, description: string, category: string, image: string}
 
 export default class TemplateModale{
 
+    modaleDialog : HTMLDialogElement
     modaleContainer:HTMLDivElement
     modaleLabel: HTMLLabelElement
     main:HTMLElement|null
@@ -20,6 +20,8 @@ export default class TemplateModale{
 
     constructor(){
         this.main = document.querySelector("main")
+        this.modaleDialog = document.createElement("dialog")
+        this.modaleDialog.classList.add("modaleDialog")
         this.modaleContainer = document.createElement("div")
         this.modaleContainer.classList.add("modaleContainer")
         this.articleQuantity = document.createElement("input")
@@ -41,20 +43,21 @@ export default class TemplateModale{
         this.articleTitle = document.querySelector(".modaleTitle")
         this.articleImg = document.querySelector(".modaleImg")
         this.articlePrice = document.querySelector(".modalePrice")
-    this.main?.append(this.modaleContainer)
+        this.modaleDialog.append(this.modaleContainer)
+        this.main?.append(this.modaleDialog)
     }
 
 
-    async cloneFetchModale() {
-        // await TemplateHome
-        const response = await fetch("https://fakestoreapi.com/products")
-        if (response.ok) {
-            const articles = await response.json()
-            articles.forEach((article: Article) => {
+    // async cloneFetchModale() {
+    //     // await TemplateHome
+    //     const response = await fetch("https://fakestoreapi.com/products")
+    //     if (response.ok) {
+    //         const articles = await response.json()
+    //         articles.forEach((article: Article) => {
                 
-            })
-        }
-    }
+    //         })
+    //     }
+    // }
 
 
 }
