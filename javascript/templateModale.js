@@ -31,11 +31,11 @@ export default class TemplateModale {
         <button class="btnAddToCart"></button>
         `;
         this.modaleContainer.append(this.modaleLabel, this.articleQuantity);
-        this.articleDesc = document.querySelector(".modaleDesc");
-        this.articleBtn = document.querySelector(".btnAddToCart");
-        this.articleTitle = document.querySelector(".modaleTitle");
-        this.articleImg = document.querySelector(".modaleImg");
-        this.articlePrice = document.querySelector(".modalePrice");
+        // this.articleDesc = this.modaleContainer.querySelector(".modaleDesc")
+        // this.articleBtn = this.modaleContainer.querySelector(".btnAddToCart")
+        // this.articleTitle = this.modaleContainer.querySelector(".modaleTitle")
+        // this.articleImg = this.modaleContainer.querySelector(".modaleImg")
+        // this.articlePrice = this.modaleContainer.querySelector(".modalePrice")
         this.modaleDialog.append(this.modaleContainer);
         this.main?.append(this.modaleDialog);
     }

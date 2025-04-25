@@ -81,7 +81,7 @@ homepageItems.forEach((homepageItem)=>{
         modale.modaleDialog.showModal
     })
 
-    homepageItem.addEventListener("click", ()=>{
+    modale.modaleDialog.addEventListener("click", ()=>{
         modale.modaleDialog.close
     })
 })
