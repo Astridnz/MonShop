@@ -114,6 +114,65 @@ button {
     height: 100%;
   }
 }
+.modaleDialog {
+  position: fixed;
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: block;
+}
+.modaleDialog ::backdrop {
+  background-color: grey;
+  opacity: 0.75;
+}
+.modaleDialog .modaleContainer {
+  position: relative;
+  top: -30%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 80%;
+  height: 80%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 10% 5% 15% 5% 10% 10% 40%;
+  grid-template-areas: "iM tM" "iM idM" "iM pM" "iM lM" "iM inM" "iM bM" "iM dM";
+}
+.modaleDialog .modaleContainer .modaleImg {
+  background-color: red;
+  grid-area: iM;
+}
+.modaleDialog .modaleContainer .modaleDesc {
+  background-color: blue;
+  grid-area: dM;
+}
+.modaleDialog .modaleContainer h2 {
+  background-color: greenyellow;
+  grid-area: tM;
+}
+.modaleDialog .modaleContainer .modaleId {
+  background-color: violet;
+  grid-area: idM;
+}
+.modaleDialog .modaleContainer .modalePrice {
+  background-color: palegreen;
+  grid-area: pM;
+}
+.modaleDialog .modaleContainer button .btnAddToCart {
+  background-color: powderblue;
+  grid-area: bM;
+}
+.modaleDialog .modaleContainer input {
+  background-color: gold;
+  grid-area: inM;
+}
+.modaleDialog .modaleContainer label {
+  background-color: pink;
+  grid-area: lM;
+}
+
 footer {
   position: relative;
   bottom: 0;
