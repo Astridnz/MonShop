@@ -29,4 +29,9 @@ a{
 h3{
     font-family: $title-font ;
     color: $text-color ;
+    text-align: center;
+    width: 80%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
