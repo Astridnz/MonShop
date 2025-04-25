@@ -3,7 +3,7 @@
     grid-template-columns: repeat(4, 1fr);
     margin: 1rem 5rem;
     .homepageItem {
- 
+        max-width: 20vw;
         min-height: max-content;
         aspect-ratio: 1/1.5;
         border : $border-color solid 1px;
@@ -37,18 +37,29 @@
     .templateContainer{
         grid-template-columns: repeat(3, 1fr);
         margin: 1rem 3rem;
+        .homepageItem{
+            max-width: 25vw;
+        }
     }
+
 }
 
 @media screen and (max-width: 870px){
     .templateContainer{
         grid-template-columns: repeat(2, 1fr);
         margin: 1rem 2rem;
+        .homepageItem{
+            max-width: 40vw;
+        }
     }
 }
 @media screen and (max-width: 575px){
     .templateContainer{
         grid-template-columns: 1fr;
         margin: 1rem;
+        .homepageItem{
+            max-width: 80vw;
+            height: 100%;
+        }
     }
 }
