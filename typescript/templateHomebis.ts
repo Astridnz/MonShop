@@ -1,5 +1,6 @@
 "use strict"
 
+
 import Product from "./Product.js"
 
 // type Article = {id:number, title: string, price: number, description: string, category: string, image: string}
@@ -7,31 +8,30 @@ import Product from "./Product.js"
 
 
 
-export default class TemplateHome {
 
-    template: HTMLTemplateElement | null
+
+    template: 
     blogFragment: DocumentFragment | undefined
-    container: HTMLDivElement | null
+    container
     homepageItems: HTMLElement[] | null
     img: HTMLImageElement[] | null
 
-    articleTitle: HTMLHeadingElement | null
-    articleImg: HTMLImageElement | null
-    articlePrice: HTMLParagraphElement | null
+    articleTitle
+    articleImg
+    articlePrice
     
 
-    constructor() {
 
-        this.container = document.querySelector(".templateContainer")
-        this.template = document.querySelector("template")
+        const container: HTMLDivElement | null = document.querySelector(".templateContainer")
+        const template: HTMLTemplateElement | null= document.querySelector("template")
 
-        this.blogFragment = this.template?.content!
+        const blogFragment = template?.content
 
-        this.homepageItems = Array.from(this.blogFragment.querySelectorAll(".homepageItem"))
-        this.img = Array.from(this.blogFragment.querySelectorAll("img"))
-        this.articleTitle = this.blogFragment.querySelector("h3")
-        this.articleImg = this.blogFragment.querySelector("img")
-        this.articlePrice = this.blogFragment.querySelector(".prix")
+        const homepageItems = Array.from(this.blogFragment.querySelectorAll(".homepageItem"))
+        const img = Array.from(this.blogFragment.querySelectorAll("img"))
+        const articleTitle: HTMLHeadingElement | null = this.blogFragment.querySelector("h3")
+        const articleImg: HTMLImageElement | null = this.blogFragment.querySelector("img")
+        const articlePrice: HTMLParagraphElement | null = this.blogFragment.querySelector(".prix")
 
         // this.cloneFetchHome()
     }

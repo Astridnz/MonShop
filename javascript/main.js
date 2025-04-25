@@ -12,5 +12,4 @@ if (window.matchMedia('screen and (max-width:575px)').matches) {
 const template = new TemplateHome();
 template.cloneFetchHome();
 //? Ajout du template aritcle Modale
-// document.addEventListener("DOMContentLoaded", () => {
 const template2 = new TemplateModale();

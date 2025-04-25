@@ -18,6 +18,5 @@ import TemplateModale from "./templateModale.js"
     template.cloneFetchHome()
 
 //? Ajout du template aritcle Modale
-// document.addEventListener("DOMContentLoaded", () => {
     const template2 = new TemplateModale()
-// })
+
