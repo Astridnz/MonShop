@@ -58,15 +58,8 @@ async function cloneFetchHome() {
             const clone = blogFragment?.cloneNode(true) as DocumentFragment
             container?.append(clone)
         })
-        console.log(products);
-        
         homepageItems = Array.from(document.querySelectorAll(".homepageItem"))
-        homepageItems?.forEach((homepageItem) => {
-            // console.log(homepageItem);
-            homepageItem.addEventListener("click", () => {
-                //    TemplateModale.classList.add("open") 
-            })
-        })
+        
         popUpModale()
     }
 }
@@ -79,10 +72,10 @@ function popUpModale()
 {
     const modale = new TemplateModale();
     
-    console.log(homepageItems);
-    homepageItems.forEach((homepageItem) => {
-    console.log(homepageItem);
+        modale.articleImg 
     
+    
+    homepageItems.forEach((homepageItem) => {
         homepageItem.addEventListener("click", () => {
             modale.modaleDialog.showModal();
         });

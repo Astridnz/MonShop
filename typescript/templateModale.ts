@@ -16,8 +16,6 @@ export default class TemplateModale{
     articleQuantity: HTMLInputElement | null
     articleBtn: HTMLButtonElement | null
     
-
-
     constructor(){
         this.main = document.querySelector("main")
         this.modaleDialog = document.createElement("dialog")
@@ -47,3 +45,4 @@ export default class TemplateModale{
         this.main?.append(this.modaleDialog)
     }
 }
+

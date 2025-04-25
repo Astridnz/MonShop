@@ -45,23 +45,15 @@ async function cloneFetchHome() {
             const clone = blogFragment?.cloneNode(true);
             container?.append(clone);
         });
-        console.log(products);
         homepageItems = Array.from(document.querySelectorAll(".homepageItem"));
-        homepageItems?.forEach((homepageItem) => {
-            // console.log(homepageItem);
-            homepageItem.addEventListener("click", () => {
-                //    TemplateModale.classList.add("open") 
-            });
-        });
         popUpModale();
     }
 }
 //TODO Ajout du template aritcle Modale
 function popUpModale() {
     const modale = new TemplateModale();
-    console.log(homepageItems);
+    modale.articleImg;
     homepageItems.forEach((homepageItem) => {
-        console.log(homepageItem);
         homepageItem.addEventListener("click", () => {
             modale.modaleDialog.showModal();
         });
