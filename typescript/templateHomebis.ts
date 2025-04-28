@@ -48,12 +48,13 @@ type Article = {id:number, title: string, price: number, description: string, ca
             
             homepageItems?.forEach((homepageItem) => {
                 console.log(homepageItem);
-                homepageItem.addEventListener("click", () => {
-                    //    TemplateModale.classList.add("open") 
+                homepageItem
+                
+                
                 })
-            })
+            }
         }
-    }
+    
 
         
         
