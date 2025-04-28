@@ -1,9 +1,6 @@
 "use strict"
 import Burger from "./burger.js"
 import Product from "./Product.js"
-import TemplateModale from "./templateModale.js"
-
-
 
 
 //TODO Ajout le burger menu en dimension phone/tablette
@@ -15,19 +12,15 @@ import TemplateModale from "./templateModale.js"
 
 
 
-
 //TODO Ajout du template article Home
-//* création du type article
-// type Article = { id: number, title: string, price: number, description: string, category: string, image: string }
-
 //* déclaration des variables pour le template d'un article sur la home page
 const container: HTMLDivElement | null = document.querySelector(".templateContainer")
 const template: HTMLTemplateElement | null = document.querySelector("template")
 const blogFragment: DocumentFragment | undefined = template?.content
 const articleTitle: HTMLHeadingElement | null = blogFragment!.querySelector("h3")
 const articleImg: HTMLImageElement | null = blogFragment!.querySelector("img")
-const articlePrice: HTMLParagraphElement | null = blogFragment!.querySelector(".prix")
 const products: Product[] = [];
+const articlePrice: HTMLParagraphElement | null = blogFragment!.querySelector(".prix")
 let homepageItems: HTMLElement[] | null = Array.from(blogFragment!.querySelectorAll(".homepageItem"))
 
 //*fonction pour rechercher les données de l'API, associer respectivement leurs valeurs aux valeurs des éléments du template et enfin cloner ce template autant de fois qu'il y a de donnée dans l'API 
@@ -36,8 +29,6 @@ async function cloneFetchHome() {
     const response = await fetch("https://fakestoreapi.com/products")
     if (response.ok) {
         const articles: Object[] = await response.json();
-
-        
         articles.forEach((article: Product) => {
             products.push(new Product(article as Product));
         })
@@ -65,23 +56,62 @@ async function cloneFetchHome() {
 }
 
 
+//TODO Ajout de la Modale
+//création de la modale en HTML, avec ses différents éléments, leurs classes et leurs attributs respectifs
+const main:HTMLElement|null = document.querySelector("main")    
+const modaleDialog : HTMLDialogElement = document.createElement("dialog")
+const modaleContainer:HTMLDivElement = document.createElement("div")
+const modaleLabel: HTMLLabelElement = document.createElement("label")
+const modaleQuantity: HTMLInputElement | null = document.createElement("input")
+modaleContainer.innerHTML=`
+<img class="modaleImg" src="" alt="">
+<p class="modaleDesc"></p>
+<h2 class="modaleTitle"></h2>
+<p class="modaleId"></p>
+<p class="modalePrice"></p>
+<button class="btnAddToCart"></button>
+`
+modaleDialog.classList.add("modaleDialog")
+modaleContainer.classList.add("modaleContainer")
+const modaleTitle: HTMLHeadingElement | null = modaleContainer.querySelector(".modaleTitle")
+const modaleImg: HTMLImageElement | null = modaleContainer.querySelector(".modaleImg")
+console.log(modaleImg);
+const modalePrice: HTMLParagraphElement | null = modaleContainer.querySelector(".modalePrice")
+const modaleDesc: HTMLParagraphElement | null = modaleContainer.querySelector(".modaleDesc")
+const modaleId: HTMLParagraphElement | null = modaleContainer.querySelector(".modaleId")
+const modaleBtn: HTMLButtonElement | null = modaleContainer.querySelector(".btnAddToCart")
+modaleQuantity.setAttribute("id", "quantity")
+modaleQuantity.setAttribute("type", "number")
+modaleLabel.setAttribute("for", "quantity")
+modaleContainer.append(modaleLabel,modaleQuantity )
+modaleDialog.append(modaleContainer)
+main?.append(modaleDialog)
 
 
-//TODO Ajout du template aritcle Modale
 function popUpModale()
 {
-    const modale = new TemplateModale();
-    
-        modale.articleImg 
-    
-    
     homepageItems.forEach((homepageItem) => {
         homepageItem.addEventListener("click", () => {
-            modale.modaleDialog.showModal();
+            products.forEach((product)=>{
+                if (homepageItem.id === product.id.toString()){
+                modaleTitle.textContent = product.title
+                modalePrice.textContent = product.price.toString()
+                modaleId.textContent = product.id.toString()
+                modaleDesc.textContent = product.description
+                modaleBtn.textContent = "Ajouter au panier"
+                modaleImg.src = product.image
+                modaleLabel.textContent = "Quantité:"
+                }
+            })
+            modaleDialog.showModal();
         });
-        modale.modaleDialog.addEventListener("click", () => {
-            modale.modaleDialog.close();
+        document.addEventListener("click", (event:MouseEvent) => {
+            const target = event.target as HTMLElement
+            if(target === modaleDialog){
+                modaleDialog.close()
+            }
         });
     });
-
 }
+
+
