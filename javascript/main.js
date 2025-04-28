@@ -1,7 +1,6 @@
 "use strict";
 import Burger from "./burger.js";
 import Product from "./Product.js";
-import TemplateModale from "./templateModale.js";
 //TODO Ajout le burger menu en dimension phone/tablette
 if (window.matchMedia('screen and (max-width:575px)').matches) {
     const burger = new Burger();
@@ -9,16 +8,14 @@ if (window.matchMedia('screen and (max-width:575px)').matches) {
     burger.logoClick();
 }
 //TODO Ajout du template article Home
-//* création du type article
-// type Article = { id: number, title: string, price: number, description: string, category: string, image: string }
 //* déclaration des variables pour le template d'un article sur la home page
 const container = document.querySelector(".templateContainer");
 const template = document.querySelector("template");
 const blogFragment = template?.content;
 const articleTitle = blogFragment.querySelector("h3");
 const articleImg = blogFragment.querySelector("img");
-const articlePrice = blogFragment.querySelector(".prix");
 const products = [];
+const articlePrice = blogFragment.querySelector(".prix");
 let homepageItems = Array.from(blogFragment.querySelectorAll(".homepageItem"));
 //*fonction pour rechercher les données de l'API, associer respectivement leurs valeurs aux valeurs des éléments du template et enfin cloner ce template autant de fois qu'il y a de donnée dans l'API 
 cloneFetchHome();
@@ -49,16 +46,57 @@ async function cloneFetchHome() {
         popUpModale();
     }
 }
-//TODO Ajout du template aritcle Modale
+//TODO Ajout de la Modale
+//création de la modale en HTML, avec ses différents éléments, leurs classes et leurs attributs respectifs
+const main = document.querySelector("main");
+const modaleDialog = document.createElement("dialog");
+const modaleContainer = document.createElement("div");
+const modaleLabel = document.createElement("label");
+const modaleQuantity = document.createElement("input");
+modaleContainer.innerHTML = `
+<img class="modaleImg" src="" alt="">
+<p class="modaleDesc"></p>
+<h2 class="modaleTitle"></h2>
+<p class="modaleId"></p>
+<p class="modalePrice"></p>
+<button class="btnAddToCart"></button>
+`;
+modaleDialog.classList.add("modaleDialog");
+modaleContainer.classList.add("modaleContainer");
+const modaleTitle = modaleContainer.querySelector(".modaleTitle");
+const modaleImg = modaleContainer.querySelector(".modaleImg");
+console.log(modaleImg);
+const modalePrice = modaleContainer.querySelector(".modalePrice");
+const modaleDesc = modaleContainer.querySelector(".modaleDesc");
+const modaleId = modaleContainer.querySelector(".modaleId");
+const modaleBtn = modaleContainer.querySelector(".btnAddToCart");
+modaleQuantity.setAttribute("id", "quantity");
+modaleQuantity.setAttribute("type", "number");
+modaleLabel.setAttribute("for", "quantity");
+modaleContainer.append(modaleLabel, modaleQuantity);
+modaleDialog.append(modaleContainer);
+main?.append(modaleDialog);
 function popUpModale() {
-    const modale = new TemplateModale();
-    modale.articleImg;
     homepageItems.forEach((homepageItem) => {
         homepageItem.addEventListener("click", () => {
-            modale.modaleDialog.showModal();
+            products.forEach((product) => {
+                if (homepageItem.id === product.id.toString()) {
+                    modaleTitle.textContent = product.title;
+                    modalePrice.textContent = product.price.toString();
+                    modaleId.textContent = product.id.toString();
+                    modaleDesc.textContent = product.description;
+                    modaleBtn.textContent = "Ajouter au panier";
+                    modaleImg.src = product.image;
+                    modaleLabel.textContent = "Quantité:";
+                }
+            });
+            modaleDialog.showModal();
         });
-        modale.modaleDialog.addEventListener("click", () => {
-            modale.modaleDialog.close();
+        document.addEventListener("click", (event) => {
+            const target = event.target;
+            if (target === modaleDialog) {
+                modaleDialog.close();
+            }
         });
     });
 }
