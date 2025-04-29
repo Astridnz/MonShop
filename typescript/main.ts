@@ -96,12 +96,12 @@ function popUpModale()
             products.forEach((product)=>{
                 if (homepageItem.id === product.id.toString()){
                 modaleTitle.textContent = product.title
-                modalePrice.textContent = product.price.toString()
-                modaleId.textContent = product.id.toString()
-                modaleDesc.textContent = product.description
+                modalePrice.textContent = `${product.price.toString()} €`
+                modaleId.textContent = `sku : 0000${product.id.toString()}`
+                modaleDesc.innerHTML = `Détails du produit :<br><br>${product.description}`
                 modaleBtn.textContent = "Ajouter au panier"
                 modaleImg.src = product.image
-                modaleLabel.textContent = "Quantité:"
+                modaleLabel.textContent = "Quantité :"
                 }
             })
             modaleDialog.showModal();
