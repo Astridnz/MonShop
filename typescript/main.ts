@@ -1,6 +1,7 @@
 "use strict"
 import Burger from "./burger.js"
 import Product from "./Product.js"
+import User from "./user.js"
 
 
 //TODO Ajout le burger menu en dimension phone/tablette
@@ -26,7 +27,7 @@ let homepageItems: HTMLElement[] | null = Array.from(blogFragment!.querySelector
 //*fonction pour rechercher les données de l'API, associer respectivement leurs valeurs aux valeurs des éléments du template et enfin cloner ce template autant de fois qu'il y a de donnée dans l'API 
 cloneFetchHome()
 async function cloneFetchHome() {
-    const response = await fetch("https://fakestoreapi.com/products")
+    const response: Response = await fetch("https://fakestoreapi.com/products")
     if (response.ok) {
         const articles: Object[] = await response.json();
         articles.forEach((article: Product) => {
@@ -114,4 +115,25 @@ function popUpModale()
     });
 }
 
+// Création d'une fonction pour le panier utilisateur
+async function fetchUser (){
+    
+    const response: Response = await fetch ('https://fakestoreapi.com/users/1')
+    if(response.ok){
+        const users: Object [] = await response.json()
+        users.forEach((user) => {
+        
+    
+    })
+    } 
+}
 
+modaleBtn.addEventListener("click", ()=>{
+    const panier = []
+    panier.push
+    if (modaleQuantity.checked) {
+            sessionStorage.setItem("NumberOfItem", "input") 
+            // modaleQuantity.value =
+        }
+    
+})

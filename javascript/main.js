@@ -100,3 +100,20 @@ function popUpModale() {
         });
     });
 }
+// Création d'une fonction pour le panier utilisateur
+async function fetchUser() {
+    const response = await fetch('https://fakestoreapi.com/users/1');
+    if (response.ok) {
+        const users = await response.json();
+        users.forEach((user) => {
+            if (modaleQuantity.checked) {
+                sessionStorage.setItem("NumberOfItem", "input");
+            }
+        });
+    }
+}
+modaleBtn.addEventListener("click", () => {
+    const panier = [];
+    panier.push;
+    modaleQuantity.value;
+});
