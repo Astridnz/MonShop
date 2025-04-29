@@ -12,6 +12,7 @@ if (window.matchMedia('screen and (max-width:575px)').matches) {
 const container = document.querySelector(".templateContainer");
 const template = document.querySelector("template");
 const blogFragment = template?.content;
+
 const articleTitle = blogFragment.querySelector("h3");
 const articleImg = blogFragment.querySelector("img");
 const products = [];
