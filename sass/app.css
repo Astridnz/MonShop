@@ -50,6 +50,13 @@ button {
   padding: 1rem auto;
   width: 100%;
 }
+button:active {
+  transform: translateY(3px);
+  cursor: pointer;
+}
+button:hover {
+  cursor: pointer;
+}
 
 .templateContainer {
   display: grid;
