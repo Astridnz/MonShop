@@ -12,6 +12,7 @@ if (window.matchMedia('screen and (max-width:575px)').matches) {
 const container = document.querySelector(".templateContainer");
 const template = document.querySelector("template");
 const blogFragment = template?.content;
+
 const articleTitle = blogFragment.querySelector("h3");
 const articleImg = blogFragment.querySelector("img");
 const products = [];
@@ -100,3 +101,20 @@ function popUpModale() {
         });
     });
 }
+// Création d'une fonction pour le panier utilisateur
+async function fetchUser() {
+    const response = await fetch('https://fakestoreapi.com/users/1');
+    if (response.ok) {
+        const users = await response.json();
+        users.forEach((user) => {
+            if (modaleQuantity.checked) {
+                sessionStorage.setItem("NumberOfItem", "input");
+            }
+        });
+    }
+}
+modaleBtn.addEventListener("click", () => {
+    const panier = [];
+    panier.push;
+    modaleQuantity.value;
+});
