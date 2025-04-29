@@ -2,7 +2,8 @@ button{
     background-color: $text-color;
     font-family: $text-font;
     color: $background-color;
-    padding: 1rem 5rem;
     border: transparent;
     font-size: $font-size-xs;
+    padding: 1rem auto;
+    width: 100%;
 }

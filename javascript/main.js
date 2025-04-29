@@ -83,12 +83,12 @@ function popUpModale() {
             products.forEach((product) => {
                 if (homepageItem.id === product.id.toString()) {
                     modaleTitle.textContent = product.title;
-                    modalePrice.textContent = product.price.toString();
-                    modaleId.textContent = product.id.toString();
-                    modaleDesc.textContent = product.description;
+                    modalePrice.textContent = `${product.price.toString()} €`;
+                    modaleId.textContent = `sku : 0000${product.id.toString()}`;
+                    modaleDesc.innerHTML = `Détails du produit :<br><br>${product.description}`;
                     modaleBtn.textContent = "Ajouter au panier";
                     modaleImg.src = product.image;
-                    modaleLabel.textContent = "Quantité:";
+                    modaleLabel.textContent = "Quantité :";
                 }
             });
             modaleDialog.showModal();
@@ -101,3 +101,20 @@ function popUpModale() {
         });
     });
 }
+// Création d'une fonction pour le panier utilisateur
+async function fetchUser() {
+    const response = await fetch('https://fakestoreapi.com/users/1');
+    if (response.ok) {
+        const users = await response.json();
+        users.forEach((user) => {
+            if (modaleQuantity.checked) {
+                sessionStorage.setItem("NumberOfItem", "input");
+            }
+        });
+    }
+}
+modaleBtn.addEventListener("click", () => {
+    const panier = [];
+    panier.push;
+    modaleQuantity.value;
+});

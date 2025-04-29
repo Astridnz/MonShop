@@ -6,64 +6,78 @@
     width: 100vw;
     height: 100vh;
     z-index: 100;
-    // display: block;
     background : rgba($color: $background-color, $alpha: 0.8);
     backdrop-filter: blur(5px);
     border: none;
 
         .modaleContainer{
+            padding: auto 1rem;
+            background-color: $background-color;
             position: relative;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 80%;
             height: 80%;
-        display: grid;
-        grid-template-columns: 50% 50%;
-        grid-template-rows: 10% 5% 15% 5% 10% 10% 40%;
-        grid-template-areas: 
-        "iM tM"
-        "iM idM"
-        "iM pM"
-        "iM lM"
-        "iM inM"
-        "iM bM"
-        "iM dM"
-        ;
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-template-rows: repeat(6, auto) 30%;
+            grid-template-areas: 
+            "iM tM"
+            "iM idM"
+            "iM pM"
+            "iM lM"
+            "iM inM"
+            "iM bM"
+            "iM dM"
+            ;
         .modaleImg{
-            background-color: red;
             grid-area: iM ;
-    
+            margin: .5rem auto;
+            width: 80%;
+            object-fit: scale-down;
         }
         .modaleDesc{
-            background-color: blue;
+            margin: auto 1rem auto 0;
             grid-area: dM;
+            text-align: justify;
+            font-size: $font-size-xs;
+
         }
         h2{
-                background-color: greenyellow;
                 grid-area: tM ;
+                font-size: $font-size-l;
+                text-align: start;
+                margin-top: 2rem;
         }
         .modaleId{
-            background-color: violet;
+
             grid-area: idM ;
+            color: slategrey;
+            font-size: $font-size-xs;
+            font-style: italic;
         }
         .modalePrice{
-            background-color: palegreen;
             grid-area: pM ;
+            font-size: $font-size-l;
+            font-weight:600;
+            font-family: $title-font;
         }
         button{
             .btnAddToCart{
-                background-color: powderblue;
                 grid-area: bM ;
             }
         }
         input{
-            background-color: gold;
             grid-area: inM ;
+            width: 30%;
+            height: 50%;
+
         }
         label{
-            background-color: pink;
             grid-area: lM ;
+            font-style: italic;
+            height: max-content;
         }
     }
 }
