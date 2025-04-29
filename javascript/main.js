@@ -1,6 +1,8 @@
 "use strict";
 import Burger from "./burger.js";
 import Product from "./Product.js";
+import User from "./user.js";
+import Cart from "./carts.js";
 //TODO Ajout le burger menu en dimension phone/tablette
 if (window.matchMedia('screen and (max-width:575px)').matches) {
     const burger = new Burger();
@@ -44,6 +46,7 @@ async function cloneFetchHome() {
         });
         homepageItems = Array.from(document.querySelectorAll(".homepageItem"));
         popUpModale();
+        AddProductToCart();
     }
 }
 //TODO Ajout de la Modale
@@ -65,7 +68,6 @@ modaleDialog.classList.add("modaleDialog");
 modaleContainer.classList.add("modaleContainer");
 const modaleTitle = modaleContainer.querySelector(".modaleTitle");
 const modaleImg = modaleContainer.querySelector(".modaleImg");
-console.log(modaleImg);
 const modalePrice = modaleContainer.querySelector(".modalePrice");
 const modaleDesc = modaleContainer.querySelector(".modaleDesc");
 const modaleId = modaleContainer.querySelector(".modaleId");
@@ -100,20 +102,56 @@ function popUpModale() {
         });
     });
 }
-// Création d'une fonction pour le panier utilisateur
+const users = [];
+const carts = [];
+fetchUser();
+fetchCart();
+// Création d'une fonction pour les data utilisateur 
 async function fetchUser() {
-    const response = await fetch('https://fakestoreapi.com/users/1');
+    const response = await fetch('https://fakestoreapi.com/users');
     if (response.ok) {
-        const users = await response.json();
-        users.forEach((user) => {
-            if (modaleQuantity.checked) {
-                sessionStorage.setItem("NumberOfItem", "input");
-            }
+        const usersData = await response.json();
+        usersData.forEach((userData) => {
+            users.push(new User(userData));
         });
     }
 }
-modaleBtn.addEventListener("click", () => {
-    const panier = [];
-    panier.push;
-    modaleQuantity.value;
+// Création d'une fonction pour les data panier 
+async function fetchCart() {
+    const response = await fetch('https://fakestoreapi.com/carts');
+    if (response.ok) {
+        const cartsData = await response.json();
+        cartsData.forEach((cartData) => {
+            carts.push(new Cart(cartData));
+        });
+    }
+    //         carts.forEach((cart)=>{
+    //         console.log(cart);
+    //         console.log("cart id:", cart.id);
+    //         console.log("cart userId:", cart.userId);
+    //         console.log("cart products:", cart.products);
+    //         console.log("cart date:", cart.date);
+    // })
+}
+modaleBtn.addEventListener('click', () => {
+    modaleBtn.style.backgroundColor = 'red';
 });
+const panier = { id: 0, userId: 0, products: [], date: "" };
+function AddProductToCart() {
+    modaleBtn.addEventListener("click", () => {
+        products.forEach((product) => {
+            // if (modaleQuantity.checked) {
+            //         sessionStorage.setItem("NumberOfItem", "input") 
+            // }
+            if (modaleId.textContent === `sku : 0000${product.id}`) {
+                panier.products.push(product);
+                console.log("produit pushé dans le panier");
+            }
+            console.log("product.id: ", product.id);
+        });
+        // panier.push()    //         // modaleQuantity.value =
+        // }
+    });
+}
+console.log(panier);
+console.log("modaleId.textContent", modaleId.textContent);

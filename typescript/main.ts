@@ -2,14 +2,15 @@
 import Burger from "./burger.js"
 import Product from "./Product.js"
 import User from "./user.js"
+import Cart from "./carts.js"
 
 
 //TODO Ajout le burger menu en dimension phone/tablette
-    if (window.matchMedia('screen and (max-width:575px)').matches){
+if (window.matchMedia('screen and (max-width:575px)').matches){
     const burger = new Burger()
     burger.toggle(burger.nav)
     burger.logoClick()
-    }
+}
 
 
 
@@ -33,7 +34,7 @@ async function cloneFetchHome() {
         articles.forEach((article: Product) => {
             products.push(new Product(article as Product));
         })
-
+        
         products.forEach((product)=>{
             homepageItems?.forEach((homepageItem) => {
                 homepageItem.id = `${product.id}`
@@ -53,9 +54,9 @@ async function cloneFetchHome() {
         homepageItems = Array.from(document.querySelectorAll(".homepageItem"))
         
         popUpModale()
+        AddProductToCart()
     }
 }
-
 
 //TODO Ajout de la Modale
 //création de la modale en HTML, avec ses différents éléments, leurs classes et leurs attributs respectifs
@@ -76,7 +77,6 @@ modaleDialog.classList.add("modaleDialog")
 modaleContainer.classList.add("modaleContainer")
 const modaleTitle: HTMLHeadingElement | null = modaleContainer.querySelector(".modaleTitle")
 const modaleImg: HTMLImageElement | null = modaleContainer.querySelector(".modaleImg")
-console.log(modaleImg);
 const modalePrice: HTMLParagraphElement | null = modaleContainer.querySelector(".modalePrice")
 const modaleDesc: HTMLParagraphElement | null = modaleContainer.querySelector(".modaleDesc")
 const modaleId: HTMLParagraphElement | null = modaleContainer.querySelector(".modaleId")
@@ -91,22 +91,22 @@ main?.append(modaleDialog)
 
 function popUpModale()
 {
-    homepageItems.forEach((homepageItem) => {
+    homepageItems.forEach((homepageItem:HTMLElement) => {
         homepageItem.addEventListener("click", () => {
-            products.forEach((product)=>{
+            products.forEach((product: Product)=>{
                 if (homepageItem.id === product.id.toString()){
-                modaleTitle.textContent = product.title
+                    modaleTitle.textContent = product.title
                 modalePrice.textContent = `${product.price.toString()} €`
                 modaleId.textContent = `sku : 0000${product.id.toString()}`
                 modaleDesc.innerHTML = `Détails du produit :<br><br>${product.description}`
                 modaleBtn.textContent = "Ajouter au panier"
                 modaleImg.src = product.image
                 modaleLabel.textContent = "Quantité :"
-                }
-            })
-            modaleDialog.showModal();
-        });
-        document.addEventListener("click", (event:MouseEvent) => {
+            }
+        })
+        modaleDialog.showModal();
+    });
+    document.addEventListener("click", (event:MouseEvent) => {
             const target = event.target as HTMLElement
             if(target === modaleDialog){
                 modaleDialog.close()
@@ -114,26 +114,67 @@ function popUpModale()
         });
     });
 }
+const users: User[] = [] 
+const carts: Cart[] = [] 
+fetchUser()
+fetchCart()
 
-// Création d'une fonction pour le panier utilisateur
+// Création d'une fonction pour les data utilisateur 
 async function fetchUser (){
     
-    const response: Response = await fetch ('https://fakestoreapi.com/users/1')
+    const response: Response = await fetch ('https://fakestoreapi.com/users')
     if(response.ok){
-        const users: Object [] = await response.json()
-        users.forEach((user) => {
-        
-    
-    })
-    } 
+        const usersData:User[] = await response.json()
+        usersData.forEach((userData) => {
+            users.push(new User(userData))
+        }) 
+    }
 }
 
-modaleBtn.addEventListener("click", ()=>{
-    const panier = []
-    panier.push
-    if (modaleQuantity.checked) {
-            sessionStorage.setItem("NumberOfItem", "input") 
-            // modaleQuantity.value =
-        }
+
+// Création d'une fonction pour les data panier 
+async function fetchCart (){
     
-})
+    const response: Response = await fetch ('https://fakestoreapi.com/carts')
+    if(response.ok){
+        const cartsData:Cart[] = await response.json()
+            cartsData.forEach((cartData) => {
+                carts.push(new Cart(cartData))
+            }) 
+        }
+//         carts.forEach((cart)=>{
+//         console.log(cart);
+//         console.log("cart id:", cart.id);
+//         console.log("cart userId:", cart.userId);
+//         console.log("cart products:", cart.products);
+//         console.log("cart date:", cart.date);
+// })
+    }
+    
+    modaleBtn.addEventListener('click', ()=>{
+        modaleBtn.style.backgroundColor = 'red'
+    })
+
+
+    const panier: Cart = {id:0, userId:0, products:[], date: ""}
+
+    function AddProductToCart (){
+    modaleBtn.addEventListener("click", () => {
+    products.forEach((product) => {
+        // if (modaleQuantity.checked) {
+        //         sessionStorage.setItem("NumberOfItem", "input") 
+        // }
+        
+        
+        if (modaleId.textContent === `sku : 0000${product.id}`) {
+            
+            panier.products.push(product)
+            console.log("produit pushé dans le panier");
+        }
+        console.log("product.id: ", product.id)
+    })
+    // panier.push()    //         // modaleQuantity.value =
+    // }
+})}
+    console.log(panier);
+console.log("modaleId.textContent", modaleId.textContent);
