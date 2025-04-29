@@ -6,4 +6,11 @@ button{
     font-size: $font-size-xs;
     padding: 1rem auto;
     width: 100%;
+    &:active{
+        transform: translateY(3px);
+        cursor : pointer;
+    }
+    &:hover{
+        cursor : pointer;
+    }
 }
