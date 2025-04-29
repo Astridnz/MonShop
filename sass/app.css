@@ -138,7 +138,7 @@ button {
   height: 80%;
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: repeat(6, auto) 30%;
+  grid-template-rows: repeat(6, autofit) 30%;
   grid-template-areas: "iM tM" "iM idM" "iM pM" "iM lM" "iM inM" "iM bM" "iM dM";
 }
 .modaleDialog .modaleContainer .modaleImg {
