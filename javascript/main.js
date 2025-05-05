@@ -14,7 +14,6 @@ if (window.matchMedia('screen and (max-width:575px)').matches) {
 const container = document.querySelector(".templateContainer");
 const template = document.querySelector("template");
 const blogFragment = template?.content;
-
 const articleTitle = blogFragment.querySelector("h3");
 const articleImg = blogFragment.querySelector("img");
 const products = [];
@@ -50,7 +49,7 @@ async function cloneFetchHome() {
         AddProductToCart();
     }
 }
-//TODO Ajout de la Modale
+//TODO Ajout de la Modale Ajouter au panier
 //création de la modale en HTML, avec ses différents éléments, leurs classes et leurs attributs respectifs
 const main = document.querySelector("main");
 const modaleDialog = document.createElement("dialog");
@@ -61,9 +60,13 @@ modaleContainer.innerHTML = `
 <img class="modaleImg" src="" alt="">
 <p class="modaleDesc"></p>
 <h2 class="modaleTitle"></h2>
-<p class="modaleId"></p>
+<p class="modaleSkuId">sku : 00000</p>
 <p class="modalePrice"></p>
 <button class="btnAddToCart"></button>
+<div class = "btnModaleContainer">
+    <button class="btnKeepShopping">Continuer vos achats</button>
+    <button class="btnGoToCart">Voir le panier</button>
+</div>
 `;
 modaleDialog.classList.add("modaleDialog");
 modaleContainer.classList.add("modaleContainer");
@@ -71,10 +74,17 @@ const modaleTitle = modaleContainer.querySelector(".modaleTitle");
 const modaleImg = modaleContainer.querySelector(".modaleImg");
 const modalePrice = modaleContainer.querySelector(".modalePrice");
 const modaleDesc = modaleContainer.querySelector(".modaleDesc");
-const modaleId = modaleContainer.querySelector(".modaleId");
-const modaleBtn = modaleContainer.querySelector(".btnAddToCart");
+const modaleSkuId = modaleContainer.querySelector(".modaleSkuId");
+const btnAddToCart = modaleContainer.querySelector(".btnAddToCart");
+const btnModaleContainer = modaleContainer.querySelector(".btnModaleContainer");
+const btnKeepShopping = modaleContainer.querySelector(".btnKeepShopping");
+const btnGoToCart = modaleContainer.querySelector(".btnGoToCart");
+btnModaleContainer.style.width = "0";
 modaleQuantity.setAttribute("id", "quantity");
+modaleQuantity.setAttribute("min", "0");
+modaleQuantity.setAttribute("max", "99");
 modaleQuantity.setAttribute("type", "number");
+modaleQuantity.value = "1";
 modaleLabel.setAttribute("for", "quantity");
 modaleContainer.append(modaleLabel, modaleQuantity);
 modaleDialog.append(modaleContainer);
@@ -86,9 +96,9 @@ function popUpModale() {
                 if (homepageItem.id === product.id.toString()) {
                     modaleTitle.textContent = product.title;
                     modalePrice.textContent = `${product.price.toString()} €`;
-                    modaleId.textContent = `sku : 0000${product.id.toString()}`;
+                    modaleSkuId.textContent = `sku : 0000${product.id.toString()}`;
                     modaleDesc.innerHTML = `Détails du produit :<br><br>${product.description}`;
-                    modaleBtn.textContent = "Ajouter au panier";
+                    btnAddToCart.textContent = "Ajouter au panier";
                     modaleImg.src = product.image;
                     modaleLabel.textContent = "Quantité :";
                 }
@@ -98,16 +108,18 @@ function popUpModale() {
         document.addEventListener("click", (event) => {
             const target = event.target;
             if (target === modaleDialog) {
+                resetModale();
                 modaleDialog.close();
             }
         });
     });
+    console.log(modaleSkuId);
 }
 const users = [];
 const carts = [];
 fetchUser();
 fetchCart();
-// Création d'une fonction pour les data utilisateur 
+//TODO Création d'une fonction pour les data utilisateur 
 async function fetchUser() {
     const response = await fetch('https://fakestoreapi.com/users');
     if (response.ok) {
@@ -117,7 +129,7 @@ async function fetchUser() {
         });
     }
 }
-// Création d'une fonction pour les data panier 
+//TODO Création d'une fonction pour les data panier 
 async function fetchCart() {
     const response = await fetch('https://fakestoreapi.com/carts');
     if (response.ok) {
@@ -126,33 +138,38 @@ async function fetchCart() {
             carts.push(new Cart(cartData));
         });
     }
-    //         carts.forEach((cart)=>{
-    //         console.log(cart);
-    //         console.log("cart id:", cart.id);
-    //         console.log("cart userId:", cart.userId);
-    //         console.log("cart products:", cart.products);
-    //         console.log("cart date:", cart.date);
-    // })
 }
-modaleBtn.addEventListener('click', () => {
-    modaleBtn.style.backgroundColor = 'red';
-});
+//TODO Création d'une fonction rendre fonctionnel le bouton ajouter au panier et le nombre d'articles choisi
 const panier = { id: 0, userId: 0, products: [], date: "" };
 function AddProductToCart() {
-    modaleBtn.addEventListener("click", () => {
+    btnAddToCart.addEventListener("click", function () {
         products.forEach((product) => {
-            // if (modaleQuantity.checked) {
-            //         sessionStorage.setItem("NumberOfItem", "input") 
-            // }
-            if (modaleId.textContent === `sku : 0000${product.id}`) {
-                panier.products.push(product);
-                console.log("produit pushé dans le panier");
+            if (parseInt(modaleSkuId.textContent.slice(-2)) === product.id) {
+                for (let i = 0; i < parseInt(modaleQuantity.value); i++) {
+                    panier.products.push(product);
+                    btnModaleContainer.style.width = "100%";
+                    btnAddToCart.style.width = "0";
+                    if (parseInt(modaleQuantity.value) > 0) {
+                        sessionStorage.setItem("product", "");
+                    }
+                }
+                console.log(panier);
             }
-            console.log("product.id: ", product.id);
         });
-        // panier.push()    //         // modaleQuantity.value =
-        // }
     });
 }
-console.log(panier);
-console.log("modaleId.textContent", modaleId.textContent);
+//TODO remettre le bouton "ajouter au panier" de la modale visible et les deux autres invisibles, plus réaction au clic de ces deux aurtes bouton
+function resetModale() {
+    btnModaleContainer.style.width = "0";
+    btnAddToCart.style.width = "100%";
+}
+btnKeepShopping.addEventListener("click", resetModale);
+btnKeepShopping.addEventListener("click", () => {
+    modaleDialog.close();
+});
+btnGoToCart.addEventListener("click", resetModale);
+btnGoToCart.addEventListener("click", () => {
+    window.location.href = "cart.html";
+});
+//TODO création modale Panier
+const cartModale = new Cart({});
